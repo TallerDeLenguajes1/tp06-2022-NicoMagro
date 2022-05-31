@@ -1,3 +1,11 @@
+public enum cargo{
+        Auxiliar,
+        Administrativo,
+        Ingeniero,
+        Especialista,
+        Investigador
+    }
+
 public class empleados
 {
     public string nombre{get;set;}
@@ -9,11 +17,5 @@ public class empleados
     public double sueldoBasico;
     public cargo cargoEmpleado;
 
-    public enum cargo{
-        Auxiliar,
-        Administrativo,
-        Ingeniero,
-        Especialista,
-        Investigador
-    }
+    public cargo cargoEmp;
 }

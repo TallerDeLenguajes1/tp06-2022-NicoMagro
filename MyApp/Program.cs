@@ -1,32 +1,57 @@
-﻿Console.WriteLine("A continuacion ingrese los datos del empleado");
-Console.WriteLine("Nombre: ");
-empleados empleado = new empleados();
-empleado.nombre = Console.ReadLine();
-empleado.apellido = Console.ReadLine();
-empleado.nacimiento = DateTime.UtcNow;
-empleado.estadoCivil = Convert.ToChar(Console.ReadLine());
-empleado.genero = Convert.ToChar(Console.ReadLine());
-empleado.ingreso = DateTime.Now;
-empleado.sueldoBasico = Convert.ToDouble(Console.ReadLine());
-Console.WriteLine("Elija el cargo del empleado");
-int opcion = Convert.ToInt32(Console.ReadLine());
-switch (opcion)
+﻿using System.Globalization;
+
+Console.WriteLine("Ingrese la cantidad de empleados a cargar: ");
+int cantidad = Convert.ToInt32(Console.ReadLine());
+empleados[] emp = new empleados[cantidad];
+
+CultureInfo provider = CultureInfo.InvariantCulture;
+string format = "MM/dd/yyyy";
+
+for (int i = 0; i < cantidad; i++)
 {
-    case 1:
-        empleado.cargoEmpleado = empleados.cargo.Administrativo;
+    emp[i] = new empleados();
+    Console.WriteLine("A continuacion ingrese los datos del empleado");
+    Console.WriteLine("Nombre: ");
+    emp[i].nombre = Console.ReadLine();
+    Console.WriteLine("Apellido: ");
+    emp[i].apellido = Console.ReadLine();
+    Console.WriteLine("Nacimiento: ");
+    emp[i].nacimiento = DateTime.ParseExact(Console.ReadLine(), format, provider);
+    Console.WriteLine("Estado civil ('C' casado, 'S' soltero): ");
+    emp[i].estadoCivil = Convert.ToChar(Console.ReadLine());
+    Console.WriteLine("Genero: ");
+    emp[i].genero = Convert.ToChar(Console.ReadLine());
+    Console.WriteLine("Fecha de ingreso: ");
+    emp[i].ingreso = DateTime.ParseExact(Console.ReadLine(), format, provider);
+    Console.WriteLine("Sueldo basico: ");
+    emp[i].sueldoBasico = Convert.ToDouble(Console.ReadLine());
+
+    Random rnd = new Random();
+    int opcion = rnd.Next(1,5);
+
+    switch (opcion)
+    {
+        case 1:
+            emp[i].cargoEmpleado = cargo.Administrativo;
+            Console.WriteLine("Rango: Administrativo");
+            break;
+        case 2:
+            emp[i].cargoEmpleado = cargo.Auxiliar;
+            Console.WriteLine("Rango: Auxiliar");
+            break;
+        case 3:
+            emp[i].cargoEmpleado = cargo.Especialista;
+            Console.WriteLine("Rango: Especialista");
+            break;
+        case 4:
+            emp[i].cargoEmpleado = cargo.Ingeniero;
+            Console.WriteLine("Rango: Ingeniero");
+            break;
+        case 5:
+            emp[i].cargoEmpleado = cargo.Investigador;
+            Console.WriteLine("Rango: Investigador");
+            break;
+        default:
         break;
-    case 2:
-        empleado.cargoEmpleado = empleados.cargo.Auxiliar;
-        break;
-    case 3:
-        empleado.cargoEmpleado = empleados.cargo.Especialista;
-        break;
-    case 4:
-        empleado.cargoEmpleado = empleados.cargo.Ingeniero;
-        break;
-    case 5:
-        empleado.cargoEmpleado = empleados.cargo.Investigador;
-        break;
-    default:
-    break;
+    }
 }
